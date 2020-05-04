@@ -1,0 +1,4 @@
+  File "person_detect.py", line 80
+    if conf >= float(0.5)
+                        ^
+SyntaxError: invalid syntax

@@ -77,7 +77,7 @@ class PersonDetect:
         
         for box in result[0][0]:
             conf = box[2]
-            if conf >= 0.5
+            if conf >= float(0.5)
             coords = preprocess_output(box,initial_dims)
             all_coords.append(coords)
             image=draw_outputs(coords,image)
