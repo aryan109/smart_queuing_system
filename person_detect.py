@@ -64,7 +64,7 @@ class PersonDetect:
 #         raise NotImplementedError
         
     def predict(self, image,initial_dims):
-        processed_image = preprocess_input(image) 
+        processed_image = self.preprocess_input(image) 
         self.net.start_async(request_id = 0, inputs = {self.input_name : processed_image})
         while True:
             status = self.net.requests[0].wait(-1)
@@ -77,10 +77,10 @@ class PersonDetect:
         
         for box in result[0][0]:
             conf = box[2]
-            if conf >= float(0.5)
-            coords = preprocess_output(box,initial_dims)
-            all_coords.append(coords)
-            image=draw_outputs(coords,image)
+            if conf >= float(0.5):
+                coords = self.preprocess_output(box,initial_dims)
+                all_coords.append(coords)
+                image=self.draw_outputs(coords,image)
         return all_coords,image
         
         
@@ -102,12 +102,12 @@ class PersonDetect:
                       box[4] * initial_dims[0],
                      box[5] * initial_dims[1],
                      box[6] * initial_dims[0]]
-        retun coords
+        return coords
         
     '''
     TODO: This method needs to be completed by you
     '''
-        raise NotImplementedError
+#         raise NotImplementedError
 
     def preprocess_input(self, image):
         image=cv2.resize(image, (300,300), interpolation = cv2.INTER_AREA)
@@ -116,7 +116,7 @@ class PersonDetect:
     '''
     TODO: This method needs to be completed by you
     '''
-        raise NotImplementedError
+#         raise NotImplementedError
 
 
 def main(args):

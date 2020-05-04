@@ -1,4 +1,2 @@
-  File "person_detect.py", line 80
-    if conf >= float(0.5)
-                        ^
-SyntaxError: invalid syntax
+person_detect.py:48: DeprecationWarning: Reading network using constructor is deprecated. Please, use IECore.read_network() method instead
+  self.model=IENetwork(self.model_structure, self.model_weights)
