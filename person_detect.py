@@ -97,7 +97,7 @@ class PersonDetect:
     '''
 #         raise NotImplementedError
 
-    def preprocess_outputs(self, outputs, initial_dims):
+    def preprocess_outputs(self, box, initial_dims):
         coords = [box[3] * initial_dims[1],
                       box[4] * initial_dims[0],
                      box[5] * initial_dims[1],
@@ -168,34 +168,42 @@ def main(args):
             if not ret:
                 break
             counter+=1
-            
+            print(f'counter : {counter}')
             coords, image= pd.predict(frame,initial_dims)
+            print('got coords, image')
             num_people= queue.check_coords(coords)
+            print('got num_people')
             print(f"Total People in frame = {len(coords)}")
             print(f"Number of people in queue = {num_people}")
             out_text=""
             y_pixel=25
             
             for k, v in num_people.items():
+                print('inside #1 for')
                 out_text += f"No. of People in Queue {k} is {v} "
+                print(f'got out text: {out_text}')
                 if v >= int(max_people):
+                    print('inside if #2')
                     out_text += f" Queue full; Please move to next Queue "
                 cv2.putText(image, out_text, (15, y_pixel), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
+                print('putted text')
                 out_text=""
                 y_pixel+=40
             out_video.write(image)
+            print('written image')
             
         total_time=time.time()-start_inference_time
         total_inference_time=round(total_time, 1)
         fps=counter/total_inference_time
-
+        
         with open(os.path.join(output_path, 'stats.txt'), 'w') as f:
             f.write(str(total_inference_time)+'\n')
             f.write(str(fps)+'\n')
             f.write(str(total_model_load_time)+'\n')
-
+        print('done f.write')
         cap.release()
         cv2.destroyAllWindows()
+        print('released reasources')
     except Exception as e:
         print("Could not run Inference: ", e)
 

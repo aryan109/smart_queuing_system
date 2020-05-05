@@ -1,4 +1,4 @@
-Could not run Inference:  preprocess_outputs() takes 2 positional arguments but 3 were given
+Could not run Inference:  function takes exactly 4 arguments (2 given)
 results/
 results/manufacturing/
 results/manufacturing/CPU/
