@@ -101,7 +101,9 @@ class PersonDetect:
 #         raise NotImplementedError
     
     def draw_outputs(self, coords, image):
+        print('inside draw output')
         cv2.rectangle(image, (coords[0], coords[1]), (coords[2], coords[3]), (0,0,255,1))
+        print('drawn rectangle')
         return image
     '''
     TODO: This method needs to be completed by you

@@ -1,4 +1,13 @@
 counter : 1
+inside predict
+got processed image
+started async request
+request completed #121
+got result
+inside predict for 
+indide predict if
+got coordinates
+append coordinates
 Could not run Inference:  function takes exactly 4 arguments (2 given)
 results/
 results/manufacturing/
