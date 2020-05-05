@@ -1,4 +1,4 @@
-Could not run Inference:  'PersonDetect' object has no attribute 'exec_network'
+Could not run Inference:  'PersonDetect' object has no attribute 'output_blob'
 results/
 results/manufacturing/
 results/manufacturing/CPU/
