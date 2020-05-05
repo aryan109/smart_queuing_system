@@ -110,9 +110,12 @@ class PersonDetect:
 #         raise NotImplementedError
 
     def preprocess_input(self, image):
-        image=cv2.resize(image, (300,300), interpolation = cv2.INTER_AREA)
-        image=np.moveaxis(image, -1, 0)
-        return image
+        net_input_shape = self.input_shape
+        
+        p_image=cv2.resize(image, (net_input_shape[3], net_input_shape[2]))
+        p_image=p_image.transpose((2,0,1))
+        p_image = p_image.reshape(1, *p_image.shape)
+        return p_image
     '''
     TODO: This method needs to be completed by you
     '''
