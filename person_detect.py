@@ -97,7 +97,7 @@ class PersonDetect:
     '''
 #         raise NotImplementedError
 
-    def preprocess_outputs(self, outputs):
+    def preprocess_outputs(self, outputs, initial_dims):
         coords = [box[3] * initial_dims[1],
                       box[4] * initial_dims[0],
                      box[5] * initial_dims[1],
