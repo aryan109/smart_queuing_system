@@ -102,7 +102,14 @@ class PersonDetect:
     
     def draw_outputs(self, coords, image):
         print('inside draw output')
-        cv2.rectangle(image, (coords[0], coords[1]), (coords[2], coords[3]), (0,0,255,1))
+        frame = image
+        xmin = coords[0]
+        ymin = coords[1]
+        xmax = coords[2]
+        ymax = coords[3]
+        print('assigned values')
+        cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0,0,255,1))
+#         cv2.rectangle(image,(coords[0], coords[1]), (coords[2], coords[3]), (0,0,255,1))
         print('drawn rectangle')
         return image
     '''
