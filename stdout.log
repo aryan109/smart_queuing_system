@@ -1,4 +1,4 @@
-Could not run Inference:  name 'p_frame' is not defined
+Could not run Inference:  'PersonDetect' object has no attribute 'exec_network'
 results/
 results/manufacturing/
 results/manufacturing/CPU/

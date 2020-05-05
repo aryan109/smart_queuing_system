@@ -72,7 +72,7 @@ class PersonDetect:
                 break
             else:
                 time.sleep(1)
-        result = self.exec_network.requests[0].outputs[self.output_blob]
+        result = self.net.requests[0].outputs[self.output_blob]
         all_coords = []
         
         for box in result[0][0]:
