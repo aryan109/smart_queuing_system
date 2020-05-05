@@ -84,7 +84,7 @@ class PersonDetect:
         for box in result[0][0]:
             print('inside predict for ')
             conf = box[2]
-            if conf >= float(0.5):
+            if conf >= self.threshold:
                 print('indide predict if')
                 coords = self.preprocess_outputs(box,initial_dims)
                 print('got coordinates')
