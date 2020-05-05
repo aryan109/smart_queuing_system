@@ -64,23 +64,34 @@ class PersonDetect:
 #         raise NotImplementedError
         
     def predict(self, image,initial_dims):
-        processed_image = self.preprocess_input(image) 
+        print('inside predict')
+        processed_image = self.preprocess_input(image)
+        print('got processed image')
         self.net.start_async(request_id = 0, inputs = {self.input_name : processed_image})
+        print('started async request')
         while True:
             status = self.net.requests[0].wait(-1)
             if status == 0:
                 break
             else:
                 time.sleep(1)
+        print('request completed #121')
+        
         result = self.net.requests[0].outputs[self.output_name]
+        print('got result')
         all_coords = []
         
         for box in result[0][0]:
+            print('inside predict for ')
             conf = box[2]
             if conf >= float(0.5):
+                print('indide predict if')
                 coords = self.preprocess_outputs(box,initial_dims)
+                print('got coordinates')
                 all_coords.append(coords)
+                print('append coordinates')
                 image=self.draw_outputs(coords,image)
+                print('drawn output')
         return all_coords,image
         
         
