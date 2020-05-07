@@ -1,6 +1,6 @@
 results/
 results/manufacturing/
-results/manufacturing/cpu/
-results/manufacturing/cpu/stats.txt
-results/manufacturing/cpu/output_video.mp4
+results/manufacturing/gpu/
+results/manufacturing/gpu/stats.txt
+results/manufacturing/gpu/output_video.mp4
 stderr.log
