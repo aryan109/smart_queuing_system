@@ -57,66 +57,58 @@ class PersonDetect:
     def load_model(self):
         core = IECore()
         self.net = core.load_network(network=self.model, device_name=self.device, num_requests=1)
-    '''
-    TODO: This method needs to be completed by you
-    '''
+   
+   
     
-#         raise NotImplementedError
+
         
     def predict(self, image,initial_dims):
-        print('inside predict')
+         
         processed_image = self.preprocess_input(image)
-        print('got processed image')
+         
         self.net.start_async(request_id = 0, inputs = {self.input_name : processed_image})
-        print('started async request')
+         
         while True:
             status = self.net.requests[0].wait(-1)
             if status == 0:
                 break
             else:
                 time.sleep(1)
-        print('request completed #121')
+         
         
         result = self.net.requests[0].outputs[self.output_name]
-        print('got result')
+         
         all_coords = []
         
         for box in result[0][0]:
-            print('inside predict for ')
+             
             conf = box[2]
             if conf >= self.threshold:
-                print('indide predict if')
+                 
                 coords = self.preprocess_outputs(box,initial_dims)
-                print('got coordinates')
+                 
                 all_coords.append(coords)
-                print('append coordinates')
+                 
                 image=self.draw_outputs(coords,image)
-                print('drawn output')
+                 
         return all_coords,image
         
-        
-    '''
-    TODO: This method needs to be completed by you
-    '''
-#         raise NotImplementedError
+
     
     def draw_outputs(self, coords, image):
-        print('inside draw output')
+         
         frame = image
         xmin = int(coords[0])
         ymin = int(coords[1])
         xmax = int(coords[2])
         ymax = int(coords[3])
-        print(f"xmin {xmin}, xmax {xmax}, ymin {ymin}, ymax {ymax} ")
-        print('assigned values')
+         
+         
         cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), (0,0,255,1))
 #         cv2.rectangle(image,(coords[0], coords[1]), (coords[2], coords[3]), (0,0,255,1))
-        print('drawn rectangle')
+         
         return frame
-    '''
-    TODO: This method needs to be completed by you
-    '''
-#         raise NotImplementedError
+
 
     def preprocess_outputs(self, box, initial_dims):
         coords = [box[3] * initial_dims[1],
@@ -124,11 +116,7 @@ class PersonDetect:
                      box[5] * initial_dims[1],
                      box[6] * initial_dims[0]]
         return coords
-        
-    '''
-    TODO: This method needs to be completed by you
-    '''
-#         raise NotImplementedError
+
 
     def preprocess_input(self, image):
         net_input_shape = self.input_shape
@@ -137,10 +125,7 @@ class PersonDetect:
         p_image=p_image.transpose((2,0,1))
         p_image = p_image.reshape(1, *p_image.shape)
         return p_image
-    '''
-    TODO: This method needs to be completed by you
-    '''
-#         raise NotImplementedError
+
 
 
 def main(args):
@@ -189,29 +174,27 @@ def main(args):
             if not ret:
                 break
             counter+=1
-            print(f'counter : {counter}')
+             
             coords, image= pd.predict(frame,initial_dims)
-            print('got coords, image')
+             
             num_people= queue.check_coords(coords)
-            print('got num_people')
-            print(f"Total People in frame = {len(coords)}")
-            print(f"Number of people in queue = {num_people}")
+             
             out_text=""
             y_pixel=25
             
             for k, v in num_people.items():
-                print('inside #1 for')
+                 
                 out_text += f"No. of People in Queue {k} is {v} "
-                print(f'got out text: {out_text}')
+                 
                 if v >= int(max_people):
-                    print('inside if #2')
+                     
                     out_text += f" Queue full; Please move to next Queue "
                 cv2.putText(image, out_text, (15, y_pixel), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
-                print('putted text')
+                 
                 out_text=""
                 y_pixel+=40
             out_video.write(image)
-            print('written image')
+             
             
         total_time=time.time()-start_inference_time
         total_inference_time=round(total_time, 1)
@@ -221,10 +204,10 @@ def main(args):
             f.write(str(total_inference_time)+'\n')
             f.write(str(fps)+'\n')
             f.write(str(total_model_load_time)+'\n')
-        print('done f.write')
+         
         cap.release()
         cv2.destroyAllWindows()
-        print('released reasources')
+         
     except Exception as e:
         print("Could not run Inference: ", e)
 
