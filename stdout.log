@@ -12,8 +12,8 @@ aocl program: Running program from /opt/intel/openvino/bitstreams/a10_vision_des
 Programming device: a10gx_2ddr : Intel Vision Accelerator Design with Intel Arria 10 FPGA (acla10_1150_sg20)
 Program succeed. 
 results/
-results/transportation/
-results/transportation/fpga/
-results/transportation/fpga/stats.txt
-results/transportation/fpga/output_video.mp4
+results/retail/
+results/retail/fpga/
+results/retail/fpga/stats.txt
+results/retail/fpga/output_video.mp4
 stderr.log
